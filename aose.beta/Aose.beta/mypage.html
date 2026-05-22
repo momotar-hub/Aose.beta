@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <script src="assets/js/auth.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マイページ - AGU Sailing Club</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* マイページ専用スタイル */
+        .badge-container { display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .badge-item { padding: 12px 20px; border-radius: 25px; background: #f0f0f0; color: #aaa; font-weight: bold; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; transition: all 0.3s; border: 1px solid #e0e0e0; }
+        /* 条件達成時のバッジの見た目 */
+        .badge-item.unlocked { background: #e3f2fd; color: #0d47a1; border: 1px solid #0d47a1; box-shadow: 0 2px 5px rgba(13,71,161,0.1); }
+        .achievement-list { margin-top: 15px; }
+        .achievement-item { background: #f8f9fa; padding: 12px; border-radius: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #0d47a1; }
+        .delete-ach-btn { background: none; border: none; color: #dc3545; cursor: pointer; font-size: 1rem; }
+        .my-diary-item { padding: 15px; border-bottom: 1px solid #eee; background: #fff; margin-bottom: 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="header-logo">AGU Sailing Club</a>
+            <nav class="header-nav">
+                <ul>
+                    <li><a href="diary.html">乗艇日誌</a></li>
+                    <li><a href="maintenance.html">メンテナンス管理</a></li>
+                    <li><a href="purchase.html">購入品管理</a></li>
+                    <li><a href="calendar.html">カレンダー</a></li>
+                    <li><a href="manual.html">活動の手引き</a></li>
+                    <li><a href="mypage.html" class="active">マイページ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1 id="welcome-message">こんにちは、部員 さん</h1>
+                <p>あなたの活動記録、大会実績、獲得バッジを確認・管理できます。</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                
+                <div class="card" style="margin-bottom: 30px;">
+                    <h2><i class="fa-solid fa-medal" style="color: #ffd700;"></i> 獲得バッジ（現在の乗艇回数: <span id="total-sailing-count" style="color: #0d47a1; font-weight: bold;">0</span>回）</h2>
+                    <div class="badge-container">
+                        <div class="badge-item" id="badge-1"><i class="fa-solid fa-anchor"></i> 初出航（1回）</div>
+                        <div class="badge-item" id="badge-5"><i class="fa-solid fa-wind"></i> 順風満帆（5回）</div>
+                        <div class="badge-item" id="badge-10"><i class="fa-solid fa-crown"></i> 熟練セーラー（10回）</div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 30px;">
+                    <h2><i class="fa-solid fa-trophy" style="color: #ffae00;"></i> 大会実績の記録</h2>
+                    <form id="achievement-form" style="margin-top: 15px; display: flex; gap: 10px;">
+                        <input type="text" id="achievement-input" placeholder="例: 2026年 関東学生選手権 470級 5位" required style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                        <button type="submit" class="btn">追加</button>
+                    </form>
+                    <div class="achievement-list" id="achievement-list">
+                        </div>
+                </div>
+
+                <div class="card">
+                    <h2><i class="fa-solid fa-book-open" style="color: #4caf50;"></i> あなたが書いた乗艇日誌一覧</h2>
+                    <div id="my-diary-list" style="margin-top: 15px;">
+                        </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 Aoyama Gakuin University Sailing Club. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/mypage.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

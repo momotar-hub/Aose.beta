@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン - AGU Sailing Club</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* このページ専用のスタイル */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .login-form {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* カードの上下のpaddingを完全に揃える */
+        .login-form.card {
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+
+        .login-form h1 {
+            margin-bottom: 15px;
+        }
+
+        .login-form p {
+            margin-bottom: 25px;
+        }
+
+        .login-form .form-group {
+            margin-bottom: 25px;
+        }
+
+        /* エラーメッセージのスタイルを調整 */
+        #error-message {
+            color: #dc3545;
+            margin-top: 15px;
+            height: 1.2em;
+            /* min-heightからheightへ変更 */
+            line-height: 1.2em;
+            /* 文字を中央揃えに */
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #error-message.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <span class="header-logo">AGU Sailing Club Management</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="login-container">
+            <div class="login-form card">
+                <h1>関係者ログイン</h1>
+                <p>パスワードを入力してください</p>
+                <form id="password-form">
+                    <div class="form-group">
+                        <input type="text" id="username-input" required placeholder="部員名（例: 青山太郎）"
+                            style="margin-bottom: 15px;">
+                        <input type="password" id="password-input" required placeholder="パスワード">
+                    </div>
+                    <button type="submit" class="btn">ログイン</button>
+                </form>
+                <p id="error-message"></p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 Aoyama Gakuin University Sailing Club. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script src="assets/js/login.js"></script>
+</body>
+
+</html>
