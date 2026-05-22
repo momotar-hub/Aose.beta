@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <script src="assets/js/auth.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乗艇日誌 - AGU Sailing Club</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- ▼▼▼ Font Awesome for icons ▼▼▼ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="header-logo">AGU Sailing Club</a>
+            <nav class="header-nav">
+                <ul>
+                    <li><a href="diary.html" class="active">乗艇日誌</a></li>
+                    <li><a href="maintenance.html">メンテナンス管理</a></li>
+                    <li><a href="purchase.html">購入品管理</a></li>
+                    <li><a href="calendar.html">カレンダー</a></li>
+                    <li><a href="manual.html">活動の手引き</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger-menu" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+    
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>乗艇日誌</h1>
+                <p>日々の活動を記録し、航海技術の向上を目指します。</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="form-container card">
+                    <h2 class="form-title">日記を投稿する</h2>
+                    <form id="diary-form">
+                        <div class="form-grid-diary">
+                            <div class="form-group"><label for="diary-date">日にち</label><input type="date" id="diary-date" required></div>
+                            <div class="form-group"><label for="author">投稿者</label><input type="text" id="author" required></div>
+                            <div class="form-group"><label for="weather">天候</label><input type="text" id="weather" placeholder="例: 晴れ" required></div>
+                            <div class="form-group"><label for="temperature">気温 (°C)</label><input type="number" id="temperature" placeholder="例: 25" required></div>
+                            <div class="form-group"><label for="wind-direction">風向き</label><input type="text" id="wind-direction" placeholder="例: 南西" required></div>
+                            <div class="form-group"><label for="wind-speed">風速 (m/s)</label><input type="number" id="wind-speed" step="0.1" placeholder="例: 5.5" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="impression">その日の感想・反省点</label>
+                            <textarea id="impression" rows="6" placeholder="練習内容、反省点、気づいたことなどを自由にご記入ください。" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">投稿する</button>
+                    </form>
+                </div>
+                <div id="diary-list">
+                    <!-- JS will dynamically add diary entries here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 Aoyama Gakuin University Sailing Club. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/diary.js"></script>
+
+    <!-- ▼▼▼ Template for diary cards (used by diary.js) ▼▼▼ -->
+    <template id="diary-card-template">
+        <div class="card">
+            <button class="action-btn delete-btn" data-id>削除</button>
+            <div class="diary-header">
+                <div>
+                    <div class="diary-date"></div>
+                    <div class="diary-author"></div>
+                </div>
+            </div>
+            <div class="diary-weather-grid">
+                <div>天候: <span class="weather"></span></div>
+                <div>気温: <span class="temperature"></span></div>
+                <div>風向き: <span class="windDirection"></span></div>
+                <div>風速: <span class="windSpeed"></span></div>
+            </div>
+            <div class="diary-body">
+                <p class="impression"></p>
+            </div>
+            <div class="comment-section">
+                <h4>コメント</h4>
+                <div class="comment-list"></div>
+                <form class="comment-form" data-id>
+                    <div class="comment-form-inputs">
+                        <input class="form-group" type="text" placeholder="名前" required>
+                        <textarea class="form-group" placeholder="コメントを入力（改行できます）" rows="2" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">送信</button>
+                </form>
+            </div>
+        </div>
+    </template>
+    <!-- ▲▲▲ Template end ▲▲▲ -->
+
+    <!-- ▼▼▼ Modal for editing comments ▼▼▼ -->
+    <div class="modal" id="edit-comment-modal">
+        <div class="modal-content card">
+            <span class="modal-close">&times;</span>
+            <h2 class="form-title">コメントの編集</h2>
+            <form id="edit-comment-form">
+                <input type="hidden" id="edit-diary-id">
+                <input type="hidden" id="edit-comment-index">
+                <div class="form-group">
+                    <label for="edit-comment-author">名前</label>
+                    <input type="text" id="edit-comment-author" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-comment-text">コメント</label>
+                    <textarea id="edit-comment-text" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn">更新する</button>
+            </form>
+        </div>
+    </div>
+    <!-- ▲▲▲ Modal end ▲▲▲ -->
+</body>
+</html>
